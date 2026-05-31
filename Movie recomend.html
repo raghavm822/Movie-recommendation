@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineAI — Live Movie Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="logo">CineAI</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('trending',this)">Trending</button>
+    <button class="nav-tab" onclick="switchTab('popular',this)">Popular</button>
+    <button class="nav-tab" onclick="switchTab('top_rated',this)">Top Rated</button>
+    <button class="nav-tab" onclick="switchTab('upcoming',this)">Upcoming</button>
+    <button class="nav-tab" onclick="switchTab('now_playing',this)">Now Playing</button>
+  </div>
+  <div class="search-wrap">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search-input" placeholder="Search movies…" oninput="onSearch(this.value)">
+  </div>
+  <div class="like-nav-btn" onclick="scrollToRecs()">❤️ Picks <span class="count" id="like-count">0</span></div>
+</nav>
+
+<!-- LIVE STATUS BAR -->
+<div class="status-bar">
+  <div class="live-badge"><span class="live-dot"></span> LIVE</div>
+  <div class="status-divider"></div>
+  <div class="status-item">Last updated: <strong id="last-updated">—</strong></div>
+  <div class="status-divider"></div>
+  <div class="status-item">Movies loaded: <strong id="movies-loaded">0</strong></div>
+  <div class="status-divider"></div>
+  <div class="status-item">Next refresh: <strong id="next-refresh">—</strong></div>
+  <div class="status-divider"></div>
+  <div class="status-item" id="today-date-item">Today: <strong id="today-date">—</strong></div>
+  <button class="refresh-btn" id="refresh-btn" onclick="manualRefresh()">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+    Refresh now
+  </button>
+</div>
+
+<main id="main">
+  <div class="loader"><div class="loader-ring"></div><p>Connecting to live database…</p></div>
+</main>
+
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-backdrop" id="modal-backdrop">
+      <button class="modal-close" onclick="closeModalDirect()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
